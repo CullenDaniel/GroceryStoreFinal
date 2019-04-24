@@ -37,10 +37,12 @@ namespace GroceryStoreFinal
             {
                 lboxItemsSelected.Items.Add(lboxItemsSold.SelectedItem.Value);
                 lboxItemsSold.Items.Remove(lboxItemsSold.SelectedItem.Value);
+                lblError.Text = "";
             }
             if (lboxItemsSold.Items.Count == 0)
             {
-                Response.Write("You have selected everything.");
+                lblError.Text = "You have selected everything.";
+               // Response.Write("You have selected everything.");
             }
         }
 
@@ -50,10 +52,12 @@ namespace GroceryStoreFinal
             {
                 lboxItemsSold.Items.Add(lboxItemsSelected.SelectedItem.Value);
                 lboxItemsSelected.Items.Remove(lboxItemsSelected.SelectedItem.Value);
+                lblError.Text = "";
             }
             if (lboxItemsSelected.Items.Count == 0)
             {
-                Response.Write("It is already empty.");
+                lblError.Text = "It is already empty.";
+                //Response.Write("It is already empty.");
             }
         }
 
@@ -63,6 +67,11 @@ namespace GroceryStoreFinal
             {
                 lboxItemsSold.Items.Add(lboxItemsSelected.Items[0]);
                 lboxItemsSelected.Items.Remove(lboxItemsSelected.Items[0]);
+                lblError.Text = "";
+            }
+            if(lboxItemsSelected.Items.Count == 0)
+            {
+                lblError.Text = "It is already empty.";
             }
         }
 

@@ -24,6 +24,8 @@
             <asp:ListBox ID="lboxItemsSelected" runat="server"></asp:ListBox>
             <br />
             <asp:Button ID="btnGo" runat="server" Text="Go" OnClick="btnGo_Click"></asp:Button>
+            <br />
+            <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
             
             </center>
         </div>
