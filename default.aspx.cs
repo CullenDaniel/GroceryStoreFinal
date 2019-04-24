@@ -23,9 +23,35 @@ namespace GroceryStoreFinal
                 // We will open the connection one time and leave it open.
                 OpenConnection();
             }
+            
         }
         protected void btnGo_Click(object sender, EventArgs e)
         {
+            
+            CheckLoyalty();
+            String oldloyalty = "";
+            oldloyalty = tboxLoyalty.Text.ToString();
+            if (oldloyalty != tboxLoyalty.Text.ToString())
+            {
+                lblLoyaltyError.Text = "";
+            }
+            if (lblLoyaltyError.Text=="" && lboxStore.SelectedIndex != -1)
+            {
+                Response.Redirect("ShoppingCart.aspx"); //takes the user to the next web page
+            }
+            else
+            {
+                /*
+                oldloyalty = tboxLoyalty.Text.ToString();
+                if (oldloyalty != tboxLoyalty.Text.ToString())
+                {
+                    lblLoyaltyError.Text = "";
+                }
+                */
+
+            }
+            
+
             //if (loyaltynumbercheck)
 /*
             if (ddlStore.SelectedIndex.Equals(-1))
@@ -90,14 +116,14 @@ namespace GroceryStoreFinal
                 {
                     if (reader.GetFieldType(0).ToString().Equals("System.String") || reader.GetFieldType(1).ToString().Equals("System.Int32")) //can just about steal this line for line
                     {
-                        tmp = reader.GetString(1) + ": " + reader.GetString(0);
+                        tmp = reader.GetString(0) + ": " + reader.GetString(1); //changed so name appears before address
                     }
                     else
                     {
                         tmp = reader.GetString(0) + ": " + reader.GetString(1);      // Column 0 in the results set. Refer back to the construction of the query.
                     }
                     System.Console.WriteLine(tmp);
-                    ListBox1.Items.Add(tmp);
+                    lboxStore.Items.Add(tmp);
 
 
                 }
@@ -111,7 +137,53 @@ namespace GroceryStoreFinal
             // You can leave it open if you're judicious about it.
             //conn.Close();
         }
+        private void CheckLoyalty()
+        {
+            String tmp;
+            String tmpQuery = "Select * from tLoyalty where LoyaltyNumber ='" + tboxLoyalty.Text.ToString() + "'";
+            Boolean containsLoyalty = false;
 
+            System.Data.SqlClient.SqlConnection conn;
+            // Grab the connection object, already open, from the Session object
+            conn = (System.Data.SqlClient.SqlConnection)Session["ConnectionObject"];
+            comm = new SqlCommand(tmpQuery, conn);
+            SqlDataReader reader;
+            reader = comm.ExecuteReader();      // Se also ExecuteScalar and ExecuteNonQuery
+
+            // Now we have our data in the reader object
+
+            if (reader.HasRows)
+            {       // probably don't need this. 
+                while (reader.Read())
+                {
+                    if (reader.GetFieldType(0).ToString().Equals("System.String")) //can just about steal this line for line
+                    {
+                        tmp = reader.GetString(0) + ": " + reader.GetString(1); //changed so name appears before address
+                    }
+
+                    else
+                    {
+                        tmp = reader.GetString(1).ToString(); // Column 0 in the results set. Refer back to the construction of the query.
+                    }
+                    System.Console.WriteLine(tmp);
+
+                    lblLoyalty.Text = tmp;
+                    lblLoyaltyError.Text = "";
+
+
+                }
+
+
+            }
+            else
+            {
+                lblLoyaltyError.Text = "The Loyalty Number " +tboxLoyalty.Text +" could not be found.";
+            }
+            try { reader.Close(); }
+            catch (Exception ex) { }
+        
+
+        }
 
         private System.Configuration.ConnectionStringSettings ReadConnectionString()
         {

@@ -20,7 +20,7 @@
                 <br />
             
                 <br />
-               <asp:ListBox ID="ListBox1" runat="server"></asp:ListBox>
+               <asp:ListBox ID="lboxStore" runat="server"></asp:ListBox>
                 <br />
                 <asp:Button ID="btnLoad" runat="server" Text="load" OnClick="btnLoad_Click"></asp:Button>
                 <br />
