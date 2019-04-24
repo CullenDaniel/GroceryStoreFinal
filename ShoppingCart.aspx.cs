@@ -17,8 +17,8 @@ namespace GroceryStoreFinal
 
 
         protected void Page_Load(object sender, EventArgs e)
-        {      
-            
+        {
+
             lblDisplayStore.Text = "You have selected the following store. " + Session["Info"].ToString();
 
             if (!IsPostBack)
@@ -40,13 +40,13 @@ namespace GroceryStoreFinal
             }
             if (lboxItemsSold.Items.Count == 0)
             {
-                Response.Write("It is already empty.");
+                Response.Write("You have selected everything.");
             }
         }
 
         protected void btnRemove_Click(object sender, EventArgs e)
         {
-            if (lboxItemsSold.Items.Count != 0)
+            if (lboxItemsSelected.Items.Count != 0)
             {
                 lboxItemsSold.Items.Add(lboxItemsSelected.SelectedItem.Value);
                 lboxItemsSelected.Items.Remove(lboxItemsSelected.SelectedItem.Value);
@@ -100,9 +100,9 @@ namespace GroceryStoreFinal
             {       // probably don't need this. 
                 while (reader.Read())
                 {
-                    if (reader.GetFieldType(8).ToString().Equals("System.String") || reader.GetFieldType(1).ToString().Equals("System.Int32")) //can just about steal this line for line
+                    if (reader.GetFieldType(0).ToString().Equals("System.String")) //|| reader.GetFieldType(1).ToString().Equals("System.Int32")) //can just about steal this line for line
                     {
-                        tmp = reader.GetString(8); //+ ": " + reader.GetString(0);
+                        tmp = reader.GetString(0); //+ ": " + reader.GetString(0);
                     }
                     else
                     {

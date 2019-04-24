@@ -37,19 +37,10 @@ namespace GroceryStoreFinal
             }
             if (lblLoyaltyError.Text=="" && lboxStore.SelectedIndex != -1)
             {
+                Session["info"] = lboxStore.SelectedValue;
                 Response.Redirect("ShoppingCart.aspx"); //takes the user to the next web page
             }
-            else
-            {
-                /*
-                oldloyalty = tboxLoyalty.Text.ToString();
-                if (oldloyalty != tboxLoyalty.Text.ToString())
-                {
-                    lblLoyaltyError.Text = "";
-                }
-                */
 
-            }
             
 
             //if (loyaltynumbercheck)
