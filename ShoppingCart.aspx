@@ -10,6 +10,9 @@
     <form id="form1" runat="server">
         <div>
             <center>
+
+            <asp:Label ID="lblDisplayStore" runat="server" Text=""></asp:Label>
+            <br />
             <asp:ListBox ID="lboxItemsSold" runat="server"></asp:ListBox>
             <br />
             <asp:Button ID="btnAdd" runat="server" Text="Add Selected Item" OnClick="btnAdd_Click" />
