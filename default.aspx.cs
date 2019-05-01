@@ -23,11 +23,11 @@ namespace GroceryStoreFinal
                 // We will open the connection one time and leave it open.
                 OpenConnection();
             }
-            
+
         }
         protected void btnGo_Click(object sender, EventArgs e)
         {
-            
+
             CheckLoyalty();
             String oldloyalty = "";
             oldloyalty = tboxLoyalty.Text.ToString();
@@ -35,21 +35,21 @@ namespace GroceryStoreFinal
             {
                 lblLoyaltyError.Text = "";
             }
-            if (lblLoyaltyError.Text=="" && lboxStore.SelectedIndex != -1)
+            if (lblLoyaltyError.Text == "" && lboxStore.SelectedIndex != -1)
             {
                 Session["info"] = lboxStore.SelectedValue;
                 Response.Redirect("ShoppingCart.aspx"); //takes the user to the next web page
             }
 
-            
+
 
             //if (loyaltynumbercheck)
-/*
-            if (ddlStore.SelectedIndex.Equals(-1))
-            {
-                Response.Redirect("ShoppingCart.aspx"); //takes the user to the next web page
-            }
-            */
+            /*
+                        if (ddlStore.SelectedIndex.Equals(-1))
+                        {
+                            Response.Redirect("ShoppingCart.aspx"); //takes the user to the next web page
+                        }
+                        */
         }
 
         protected void btnLoad_Click(object sender, EventArgs e)
@@ -168,11 +168,11 @@ namespace GroceryStoreFinal
             }
             else
             {
-                lblLoyaltyError.Text = "The Loyalty Number " +tboxLoyalty.Text +" could not be found.";
+                lblLoyaltyError.Text = "The Loyalty Number " + tboxLoyalty.Text + " could not be found.";
             }
             try { reader.Close(); }
             catch (Exception ex) { }
-        
+
 
         }
 

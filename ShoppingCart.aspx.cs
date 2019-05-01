@@ -42,8 +42,23 @@ namespace GroceryStoreFinal
             if (lboxItemsSold.Items.Count == 0)
             {
                 lblError.Text = "You have selected everything.";
-               // Response.Write("You have selected everything.");
+                // Response.Write("You have selected everything.");
             }
+            int quantitiy = 0;
+            int.TryParse(TxtBoxQuantity.Text, out quantitiy);
+
+            if(TxtBoxQuantity != null)
+                
+            {
+                for (int y = 0; y <= quantitiy; y++)
+                {
+                    lboxItemsSelected.Items.Add(lboxItemsSold.SelectedItem.Value);
+                }
+            }
+
+            
+
+
         }
 
         protected void btnRemove_Click(object sender, EventArgs e)
@@ -69,7 +84,7 @@ namespace GroceryStoreFinal
                 lboxItemsSelected.Items.Remove(lboxItemsSelected.Items[0]);
                 lblError.Text = "";
             }
-            if(lboxItemsSelected.Items.Count == 0)
+            if (lboxItemsSelected.Items.Count == 0)
             {
                 lblError.Text = "It is already empty.";
             }
@@ -79,6 +94,13 @@ namespace GroceryStoreFinal
         {
             if (lboxItemsSelected.Items.Count != 0)
             {
+                for (int i = 0; i < lboxItemsSelected.Items.Count; i++)
+                {
+                    //while (i != lboxItemsSelected.Items.Count)
+                    //{
+                    Session["test"] += lboxItemsSelected.Items[i].Value + "<br />"; //Adds multiple items to a session
+                    //}
+                }
                 Response.Redirect("Checkout.aspx");
             }
         }
@@ -174,3 +196,4 @@ namespace GroceryStoreFinal
 
     }
 }
+
